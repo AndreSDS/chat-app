@@ -4,6 +4,7 @@ import "./globals.css";
 import Link from "next/link";
 import { SessionProvider } from "@/components/SessionProvider";
 import { UserButton } from "@/components/UserButton";
+import { getServerSession } from "next-auth/next";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -20,17 +21,20 @@ export const metadata: Metadata = {
   description: "ChatGPT brought to you by NextJS",
 };
 
-export default function RootLayout({
+
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const session = await getServerSession();
+  
   return (
-    <SessionProvider>
-      <html lang="en">
-        <body
-          className={`${geistSans.variable} ${geistMono.variable} antialiased px-2 md:px-5`}
-        >
+    <html lang="en">
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} antialiased px-2 md:px-5`}
+      >
+        <SessionProvider session={session}>
           <header
             className="text-white font-bold bg-green-900 text-2xl p-2 rounded-lg rounded-t-none
           shadow-md shadow-blue-300 flex items-center justify-between
@@ -48,8 +52,8 @@ export default function RootLayout({
           <div className="flex flex-col md:flex-row">
             <div className="flex-grow">{children}</div>
           </div>
-        </body>
-      </html>
-    </SessionProvider>
+        </SessionProvider>
+      </body>
+    </html>
   );
 }
