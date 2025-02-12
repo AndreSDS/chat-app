@@ -1,7 +1,7 @@
 import NextAuth, { CallbacksOptions } from "next-auth";
 import GithubProvider from "next-auth/providers/github";
 
-export const authOptions = {
+const authOptions = {
   callbacks: {
     async signIn({ profile }: { profile: { login: string } }) {
       return profile.login === "AndreSDS";
