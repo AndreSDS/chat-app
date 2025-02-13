@@ -8,29 +8,26 @@ import { getComplitaion } from "@/app/server-actions/getComplitation";
 
 interface Message {
   role: "user" | "assistant";
-  content:
-    | string
-    | {
-        text: string;
-        type: string;
-      }[];
+  content: string;
 }
 
 export default function Chat() {
   const [currentMessages, setCurrentMessages] = useState<Message[]>([]);
   const message = useRef<HTMLInputElement>(null);
+  const chatId = useRef<number | null>(null);
 
   const onClick = async () => {
     if (!message.current?.value) return;
 
-    const { messages } = await getComplitaion([
+    const { messages, id } = await getComplitaion(chatId.current, [
       ...currentMessages,
       {
         role: "user",
-        content: message.current.value as string,
+        content: message.current.value,
       },
     ]);
 
+    chatId.current = id;
     setCurrentMessages(messages);
     message.current.value = "";
   };
