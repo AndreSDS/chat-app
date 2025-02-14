@@ -5,11 +5,11 @@ import { getChatById } from "@/db";
 
 export const dynamic = "force-dynamic";
 
-export default async function ChatDetails({
-  params,
-}: {
-  params: { chatId: string };
-}) {
+type Params = Promise<{
+  chatId: string;
+}>;
+
+export default async function ChatDetails({ params }: { params: Params }) {
   const { chatId } = await params;
 
   const chat = await getChatById(parseInt(chatId));

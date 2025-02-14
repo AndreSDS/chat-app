@@ -24,11 +24,20 @@ export async function getComplitaion(
     prompt: messageHistory[0].content,
   });
 
+  const contentObject =
+    typeof response.messages[0].content[0] === "string"
+      ? response.messages[0].content[0]
+      : (response.messages[0].content[0] as unknown as {
+          type: string;
+          text: string;
+        });
+
   const messages = [
     ...messageHistory,
     {
       role: response.messages[0].role,
-      content: response.messages[0].content[0].text,
+      content:
+        typeof contentObject === "string" ? contentObject : contentObject.text,
     } as unknown as MessageHistory,
   ];
 
