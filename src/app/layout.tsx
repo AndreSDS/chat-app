@@ -21,14 +21,15 @@ export const metadata: Metadata = {
   description: "ChatGPT brought to you by NextJS",
 };
 
-
 export default async function RootLayout({
   children,
+  chats,
 }: Readonly<{
   children: React.ReactNode;
+  chats: React.ReactNode;
 }>) {
   const session = await getServerSession();
-  
+
   return (
     <html lang="en">
       <body
@@ -50,6 +51,7 @@ export default async function RootLayout({
             <UserButton />
           </header>
           <div className="flex flex-col md:flex-row">
+            {chats}
             <div className="flex-grow">{children}</div>
           </div>
         </SessionProvider>

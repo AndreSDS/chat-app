@@ -50,7 +50,7 @@ export const Chat = ({ id = null, initMessages = [] }: ChatProps) => {
     <div className="flex flex-col w-full">
       <Transcript messages={currentMessages} truncate={false} />
 
-      <div className="flex border-t-2 border-t-gray-500 pt-3 mb-4">
+      <div className="flex pt-3 mb-4">
         <Input
           ref={message}
           className="flex-grow text-xl"

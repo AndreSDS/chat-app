@@ -41,6 +41,13 @@ export async function getChatById(
   } as ChatWithMessages;
 }
 
+export async function getChats(userEmail: string): Promise<ChatWithMessages[]> {
+  const { rows: chats } =
+    await sql`SELECT * FROM chats WHERE user_email = ${userEmail}`;
+
+  return chats as ChatWithMessages[];
+}
+
 export async function getChatsWithMessages(
   userEmail: string
 ): Promise<ChatWithMessages[]> {
