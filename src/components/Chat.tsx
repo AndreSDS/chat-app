@@ -5,16 +5,24 @@ import { Input } from "./ui/input";
 import { Button } from "./ui/button";
 
 import { getComplitaion } from "@/app/server-actions/getComplitation";
+import { useRouter } from "next/navigation";
 
 interface Message {
   role: "user" | "assistant";
   content: string;
 }
 
-export default function Chat() {
-  const [currentMessages, setCurrentMessages] = useState<Message[]>([]);
+interface ChatProps {
+  id?: number | null;
+  initMessages?: Message[];
+}
+
+export const Chat = ({ id = null, initMessages = [] }: ChatProps) => {
+  const router = useRouter();
+  const [currentMessages, setCurrentMessages] =
+    useState<Message[]>(initMessages);
   const message = useRef<HTMLInputElement>(null);
-  const chatId = useRef<number | null>(null);
+  const chatId = useRef<number | null>(id);
 
   const onClick = async () => {
     if (!message.current?.value) return;
@@ -27,21 +35,19 @@ export default function Chat() {
       },
     ]);
 
-    chatId.current = id;
-    setCurrentMessages(messages);
-    message.current.value = "";
-  };
+    if (!chatId.current) {
+      router.push(`/chats/${id}`);
+      router.refresh();
+    }
 
-  //console.log({ currentMessages });
+    chatId.current = id;
+    message.current.value = "";
+    setCurrentMessages(messages);
+  };
 
   return (
     <div className="flex flex-col w-full gap-4">
       {currentMessages.map((message, index) => {
-        const textMessage =
-          Array.isArray(message.content) && message.content.length > 0
-            ? message.content[0].text
-            : message.content;
-
         return (
           <div
             key={index}
@@ -54,7 +60,7 @@ export default function Chat() {
                 message.role === "user" ? "bg-blue-500" : "bg-gray-500"
               } px-8 rounded-md`}
             >
-              {textMessage as string}
+              {message.content}
             </div>
           </div>
         );
@@ -72,4 +78,4 @@ export default function Chat() {
       </div>
     </div>
   );
-}
+};

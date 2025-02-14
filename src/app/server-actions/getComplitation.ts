@@ -26,10 +26,9 @@ export async function getComplitaion(
 
   const messages = [
     ...messageHistory,
-    // get the role value and content from the response object
     {
       role: response.messages[0].role,
-      content: response.messages[0].content,
+      content: response.messages[0].content[0].text,
     } as unknown as MessageHistory,
   ];
 

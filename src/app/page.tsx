@@ -1,5 +1,5 @@
 import { getServerSession } from "next-auth";
-import Chat from "@/components/Chat";
+import { Chat } from "@/components/Chat";
 import { Separator } from "@/components/ui/separator";
 
 export default async function Home() {
