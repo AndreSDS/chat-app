@@ -6,6 +6,7 @@ import { Button } from "./ui/button";
 
 import { getComplitaion } from "@/app/server-actions/getComplitation";
 import { useRouter } from "next/navigation";
+import Transcript from "./Transcript";
 
 interface Message {
   role: "user" | "assistant";
@@ -46,27 +47,10 @@ export const Chat = ({ id = null, initMessages = [] }: ChatProps) => {
   };
 
   return (
-    <div className="flex flex-col w-full gap-4">
-      {currentMessages.map((message, index) => {
-        return (
-          <div
-            key={index}
-            className={`mb-5 flex flex-col ${
-              message.role === "user" ? "items-end" : "items-start"
-            }`}
-          >
-            <div
-              className={`${
-                message.role === "user" ? "bg-blue-500" : "bg-gray-500"
-              } px-8 rounded-md`}
-            >
-              {message.content}
-            </div>
-          </div>
-        );
-      })}
+    <div className="flex flex-col w-full">
+      <Transcript messages={currentMessages} truncate={false} />
 
-      <div className="flex border-t-2 border-t-gray-500 pt-3 mt-3">
+      <div className="flex border-t-2 border-t-gray-500 pt-3 mb-4">
         <Input
           ref={message}
           className="flex-grow text-xl"
