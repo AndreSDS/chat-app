@@ -1,7 +1,3 @@
-export default function BlankPage() {
-    return (
-        <div>
-            Enter
-        </div>
-    );
+export default function Chats() {
+  return null;
 }
