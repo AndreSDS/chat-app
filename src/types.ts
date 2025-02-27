@@ -18,3 +18,8 @@ export interface StoredMessage extends Message {
 export interface ChatWithMessages extends Chat {
   messages: StoredMessage[];
 }
+
+export type BlogEntry = {
+  title: string;
+  text: string;
+}

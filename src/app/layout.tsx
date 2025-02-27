@@ -47,6 +47,9 @@ export default async function RootLayout({
                 <Link href="/about" className="ml-5 font-light">
                   About
                 </Link>
+                <Link href="/blog" className="ml-5 font-light active:text-2xl active:font-bold visited:text-2xl visited:font-bold">
+                  Blog
+                </Link>
               </div>
 
               <UserButton />
