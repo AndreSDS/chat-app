@@ -33,28 +33,30 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased px-2 md:px-5`}
+        className={`${geistSans.variable} ${geistMono.variable} dark antialiased px-2 md:px-5`}
       >
-        <SessionProvider session={session}>
-          <header
-            className="text-white font-bold bg-green-900 text-2xl p-2 rounded-lg rounded-t-none
+        <main className="@container">
+          <SessionProvider session={session}>
+            <header
+              className="text-white font-bold bg-green-900 text-2xl p-2 rounded-lg rounded-t-none
           shadow-md shadow-blue-300 flex items-center justify-between
         "
-          >
-            <div className="flex flex-row">
-              <Link href="/">Chat</Link>
-              <Link href="/about" className="ml-5 font-light">
-                About
-              </Link>
-            </div>
+            >
+              <div className="flex flex-row">
+                <Link href="/">Chat</Link>
+                <Link href="/about" className="ml-5 font-light">
+                  About
+                </Link>
+              </div>
 
-            <UserButton />
-          </header>
-          <div className="flex flex-col md:flex-row">
-            {chats}
-            <div className="flex-grow">{children}</div>
-          </div>
-        </SessionProvider>
+              <UserButton />
+            </header>
+            <div className="flex flex-col @md:flex-row ">
+              {chats}
+              <div className="grow">{children}</div>
+            </div>
+          </SessionProvider>
+        </main>
       </body>
     </html>
   );

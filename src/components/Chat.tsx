@@ -58,7 +58,7 @@ export const Chat = ({ id = null, initMessages = [] }: ChatProps) => {
         <Input
           value={input}
           onChange={handleInputChange}
-          className="flex-grow text-xl"
+          className="grow text-xl"
           placeholder="Question"
         />
         <Button type="submit" className="ml-3 text-xl">
